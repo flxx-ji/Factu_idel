@@ -1,75 +1,80 @@
-Factu IDEL by MB
+# 🩺 Factu IDEL by MB
 
-Mini-site vitrine pour la facturation IDEL (infirmier·e·s libéraux·ales).
-Optimisé SEO, accessibilité (a11y) et UX (animations douces, focus visibles, contrastes conformes).
+Mini-site vitrine pour la **facturation IDEL** (infirmier·e·s libéraux·ales).  
+Optimisé **SEO**, **accessibilité (a11y)** et **UX** (animations douces, focus visibles, contrastes conformes).
 
-🚀 Stack
+---
 
-Next.js (App Router, TypeScript)
+## 🚀 Stack
 
-Tailwind CSS
+- **Next.js** (App Router, TypeScript)
+- **Tailwind CSS**
+- **next/font** (Google Fonts : *Poppins*, *Lora*)
+- **Heroicons** (icônes outline)
+- **Vercel** (hébergement)
 
-next/font (Google Fonts : Poppins / Lora)
+---
 
-Heroicons (icônes outline)
+## 🛠️ Installation & scripts
 
-Vercel (hébergement)
-
-
-
-🔧 Installation & scripts
-# 1) dépendances
+### 1️⃣ Dépendances
+```bash
 npm install
 
-# 2) développement
+2️⃣ Développement
 npm run dev
 
-# 3) lint (si configuré)
+3️⃣ Lint (si configuré)
 npm run lint
 
-# 4) build production
+4️⃣ Build production
 npm run build
 
-# 5) start production
+5️⃣ Démarrage production
 npm run start
 
 
-🗂️ Architecture & imports (important)
+🗂️ Architecture & imports
+Structure du dossier src/
+
 src/
-├─ app/                     # routes + layout global
+├─ app/                     # Routes + layout global
 │  ├─ a-propos/page.tsx
 │  ├─ contact/page.tsx
 │  ├─ mentions-legales/page.tsx
 │  ├─ politique-confidentialite/page.tsx
 │  ├─ services/page.tsx
-│  ├─ layout.tsx            # polices, SEO global, <Header/> et <Footer/>
-│  └─ globals.css           # Tailwind (base, components, utilities)
+│  ├─ layout.tsx            # Polices, SEO global, Header & Footer
+│  └─ globals.css           # Base Tailwind (base, components, utilities)
 │
 ├─ components/              # UI réutilisable
 │  ├─ Header.tsx
 │  ├─ Footer.tsx
 │  ├─ CTAButton.tsx
-│  └─ Section.tsx           # wrapper sémantique + fade-in UX
+│  └─ Section.tsx           # Section + fade-in UX + SEO
 │
-├─ lib/                     # constantes, helpers
-│  └─ constants.ts          # emails, téléphone, Calendly, texte CTA, etc.
+├─ lib/                     # Constantes & helpers
+│  └─ constants.ts          # Email, téléphone, Calendly, texte CTA
 │
-└─ public/                  # assets statiques
+└─ public/                  # Assets statiques
    ├─ logo.png
    ├─ favicon.ico
    ├─ apple-touch-icon.png
    ├─ icon-32.png
    └─ icon-192.png
 
-   Les imports utilisent des alias basés sur src/. Exemples vus dans le code :
+
+🧩 Logique d’imports
+
+Les alias @/ permettent des imports clairs et rapides :
 
 import Section from '@/components/Section'
 import CTAButton from '@/components/CTAButton'
 import { CONTACT } from '@/lib/constants'
 
 
-Configuration recommandée dans tsconfig.json :
 
+⚙️ Configuration recommandée (tsconfig.json)
 {
   "compilerOptions": {
     "target": "ES2022",
@@ -91,69 +96,86 @@ Configuration recommandée dans tsconfig.json :
   }
 }
 
-🧩 Conventions & bonnes pratiques
 
-Composants : PascalCase, un fichier par composant.
+Grâce à baseUrl: "src", @/components/... pointe sur src/components/...
+et @/lib/... sur src/lib/....
 
-Pages : chaque page expose export const metadata (SEO) + un H1 unique.
 
-Accessibilité :
+🧱 Conventions & bonnes pratiques
+🧩 Composants
 
-Focus states visibles (focus-visible:ring…),
+Un fichier par composant (PascalCase)
 
-aria-label/aria-labelledby sur les sections et contrôles,
+Tous stockés dans src/components
 
-Contrastes vérifiés sur le fond vert du footer/CTA.
+📄 Pages
 
-UX :
+Chaque page exporte metadata (SEO)
 
-Section applique un fade-in doux à l’affichage,
+Un seul H1 par page
 
-CTAButton : hover/active/focus soignés, click “physique”.
+♿ Accessibilité
 
-Typo : Google Fonts via next/font (Poppins/Lora) — display: "swap" pour limiter le CLS.
+États focus visibles (focus-visible:ring…)
 
-Styles : Tailwind utility-first. Les espacements verticaux sont gérés par Section (rythme confortable).
+aria-label / aria-labelledby sur sections et contrôles
+
+Contrastes vérifiés (texte clair sur fond vert foncé)
+
+🎨 UX / UI
+
+Section → applique un fade-in doux à l’affichage
+
+CTAButton → hover/active/focus soignés, effet “clic physique”
+
+Typo → Google Fonts via next/font avec display: swap (pas de FOUT)
+
+Styles → Tailwind utility-first, marges verticales gérées par Section
 
 🔒 Mentions légales & confidentialité
 
-Pages dédiées : /mentions-legales et /politique-confidentialite.
+Pages dédiées :
+/mentions-legales et /politique-confidentialite
 
-Les liens sont accessibles depuis le footer.
+Liens accessibles depuis le footer
 
-📦 Déploiement (Vercel)
+☁️ Déploiement (Vercel)
 
-Pousser le repo sur GitHub/GitLab.
+Pousser le repo sur GitHub ou GitLab
 
-“Import Project” sur Vercel → sélectionner le repo.
+Aller sur Vercel → Import Project
 
-Build command : npm run build (par défaut Next) — Output : Next.js.
+Build command :
 
-Renseigner metadataBase/URLs dans src/app/layout.tsx (domaine réel).
+npm run build
+
+
+Output : Next.js
+
+Mettre à jour metadataBase dans src/app/layout.tsx avec ton domaine réel
 
 ✅ Contrôles qualité
-
-SEO : balises OpenGraph/Twitter, titres uniques, hiérarchie H1/H2 OK.
-
-A11y : navigation clavier complète, états focus visibles, aria cohérents.
-
-Performance : assets statiques, police en swap, composants légers.
-
+Domaine	Vérifié
+SEO	Titres uniques, OpenGraph / Twitter OK
+A11y	Navigation clavier, focus visibles, aria cohérents
+Performance	Assets statiques, police swap, composants légers
 ✍️ Crédits
 
-Design & intégration : projet “Factu IDEL by MB”.
+Design & intégration : projet Factu IDEL by MB
 
 Icônes : Heroicons
 
 Framework : Next.js
 
-FAQ rapide
+Auteur : Maténin BAMBA
 
-Où modifier les coordonnées, liens Calendly, texte CTA ?
-→ src/lib/constants.ts
+💬 FAQ rapide
 
-Comment ajouter un bouton d’appel à l’action ?
-→ <CTAButton href={CONTACT.calendly} />
+Q. Où modifier les coordonnées, liens Calendly, texte CTA ?
+➡️ src/lib/constants.ts
 
-Comment respecter les ancres sous header sticky ?
-→ Utiliser <Section id="…"> : la classe scroll-mt-24 compense l’en-tête.
+Q. Comment ajouter un bouton d’appel à l’action ?
+➡️ <CTAButton href={CONTACT.calendly} />
+
+Q. Comment éviter que le header cache les ancres ?
+➡️ La classe scroll-mt-24 appliquée sur <Section> compense la hauteur du header sticky.
